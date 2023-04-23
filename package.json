@@ -1,18 +1,28 @@
 {
-  "name": "unplugin-resource",
+  "name": "@sujian/unplugin-resource",
   "version": "1.0.0",
   "description": "",
-  "author": "",
-  "license": "ISC",
+  "author": "hens",
+  "license": "MIT",
   "keywords": [],
   "main": "index.js",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./*"
+      ]
+    }
+  },
   "scripts": {
-    "dev": "tsup -w"
+    "dev": "tsup --watch src",
+    "example:dev": "npm -C examples/vite-vue3 run dev"
   },
   "devDependencies": {
     "@sujian/eslint-config-typescript": "^0.0.25",
     "@types/fs-extra": "^11.0.1",
     "@types/node": "^18.16.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.39.0",
     "fs-extra": "11.0.0",
     "tsup": "^6.7.0",

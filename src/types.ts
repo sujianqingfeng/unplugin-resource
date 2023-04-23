@@ -1,4 +1,4 @@
-export interface Options {
+export type Options = {
   compiler?: 'vue'
   customCollections?: Record<string, any>
 }

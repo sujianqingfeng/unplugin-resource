@@ -1,5 +1,5 @@
 import { createUnplugin }  from 'unplugin'
-import { isResourcePath } from './core/loader'
+import { isResourcePath, normalizeResourcePath } from './core/loader'
 import { resolveOptions } from './core/options'
 import type { Options } from './types'
 
@@ -12,7 +12,9 @@ const unplugin = createUnplugin<Options | undefined>((options = {}) => {
     enforce: 'pre',
     resolveId(id) {
       if (isResourcePath(id)) {
-
+        const res = normalizeResourcePath(id)
+        console.log('res', res)
+        return ''
       }
     }
   }
