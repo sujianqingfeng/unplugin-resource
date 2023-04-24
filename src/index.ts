@@ -1,5 +1,5 @@
 import { createUnplugin }  from 'unplugin'
-import { generateComponentFromPath, isResourcePath, normalizeResourcePath } from './core/loader'
+import { generateComponentFromPath, isResourcePath, normalizeResourcePath, resolveResourcePath, resourceSync } from './core/loader'
 import { resolveOptions } from './core/options'
 import type { Options } from './types'
 
@@ -16,6 +16,9 @@ const unplugin = createUnplugin<Options | undefined>((options = {}) => {
           .replace(/\.\w+$/i, '')
           .replace(/^\//, '')
         console.log('resolveId', res)
+
+        resourceSync(id, resolved)
+
         return res
       }
       return null

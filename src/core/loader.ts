@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { compilers } from './compilers'
 import { ResolvedOptions } from '../types'
 
@@ -63,3 +64,15 @@ export function generateComponentFromPath(path: string, options: ResolvedOptions
   }
 }
 
+export async function resourceSync(path: string, options: ResolvedOptions) {
+  const resolved = resolveResourcePath(path)
+  if (!resolved) {
+    return
+  }
+  const { collection, resource } = resolved
+  const loader = options.customCollections[collection]
+  if (loader) {
+    const path = normalizeRealResourcePath(resource)
+    await loader(path)
+  }
+}
