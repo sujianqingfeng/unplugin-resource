@@ -9,8 +9,7 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "jsx": "preserve",
-    "preserveSymlinks": true
+    "jsx": "preserve"
   },
   "exclude": [
     "**/dist",

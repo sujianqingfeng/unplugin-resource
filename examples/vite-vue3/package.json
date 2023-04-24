@@ -1,6 +1,5 @@
 {
   "name": "vite-vue3",
-  "type": "module",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -12,6 +11,7 @@
     "vue": "^3.2.47"
   },
   "devDependencies": {
+    "@sujian/unplugin-resource": "workspace:^",
     "@vitejs/plugin-vue": "^4.1.0",
     "typescript": "^5.0.2",
     "vite": "^4.3.0",

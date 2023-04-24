@@ -1,5 +1,5 @@
 import { createUnplugin }  from 'unplugin'
-import { isResourcePath, normalizeResourcePath } from './core/loader'
+import { generateComponentFromPath, isResourcePath, normalizeResourcePath } from './core/loader'
 import { resolveOptions } from './core/options'
 import type { Options } from './types'
 
@@ -13,10 +13,26 @@ const unplugin = createUnplugin<Options | undefined>((options = {}) => {
     resolveId(id) {
       if (isResourcePath(id)) {
         const res = normalizeResourcePath(id)
-        console.log('res', res)
-        return ''
+          .replace(/\.\w+$/i, '')
+          .replace(/^\//, '')
+        console.log('resolveId', res)
+        return res
       }
-    }
+      return null
+    },
+    loadInclude(id) {
+      return isResourcePath(id)
+    },
+    async load(id) {
+      console.log('load', id)
+      const code = await generateComponentFromPath(id, resolved)
+      if (code) {
+        return {
+          code,
+          map: { version: 3, mappings: '', sources: [] } as any,
+        }
+      }
+    },
   }
 })
 
