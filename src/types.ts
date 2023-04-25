@@ -1,7 +1,7 @@
 export type Loader = (path: string) => Promise<void>
 
 export type Options = {
-  compiler?: 'vue3'
+  compiler?: 'vue3' | 'vue2'
   customCollections?: Record<string, Loader>
   prefix?: string
 }

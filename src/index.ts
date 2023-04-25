@@ -19,23 +19,32 @@ const unplugin = createUnplugin<Options | undefined>((options = {}) => {
           .replace(/\.\w+$/i, '')
           .replace(/^\//, '')
 
-        debug('resolveId', id)
-        await resourceSync(id, resolved)
+        debug('resolveId', id, res)
+        // await resourceSync(id, resolved)
         return res
       }
       return null
     },
     loadInclude(id) {
+      debug('loadInclude',id)
       return isResourcePath(id)
     },
     async load(id) {
-      const code = await generateComponentFromPath(id, resolved)
-      if (code) {
-        return {
-          code,
+      debug('load',id)
+      console.log('-----load');
+
+      // const code = await generateComponentFromPath(id, resolved)
+      // if (code) {
+      //   return {
+      //     code,
+      //     map: { version: 3, mappings: '', sources: [] } as any,
+      //   }
+      // }
+
+      return {
+          code:'export default {}',
           map: { version: 3, mappings: '', sources: [] } as any,
         }
-      }
     },
   }
 })

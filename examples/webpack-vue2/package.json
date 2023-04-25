@@ -1,0 +1,19 @@
+{
+  "name": "webpack-vue2",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env DEBUG=unplugin-resource* vue-cli-service serve"
+  },
+  "dependencies": {
+    "vue": "2.6.14",
+    "core-js": "^3.29.1"
+  },
+  "devDependencies": {
+    "@sujian/unplugin-resource": "workspace:*",
+    "@vue/cli-service": "^5.0.8",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "dotenv": "^16.0.3",
+    "vue-template-compiler": "2.6.14"
+  }
+}

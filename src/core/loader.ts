@@ -1,5 +1,9 @@
 import { compilers } from './compilers'
 import { ResolvedOptions } from '../types'
+import createDebugger from 'debug'
+
+
+const debug = createDebugger('unplugin-resource')
 
 const URL_PREFIXES = ['/~resource/', '~resource/', 'virtual:resource/', 'virtual/resource/']
 const RESOURCE_SUFFIXES = ['/(png)$']

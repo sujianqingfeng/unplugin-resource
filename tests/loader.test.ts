@@ -1,5 +1,5 @@
 import { test, expect, describe } from 'vitest'
-import { normalizeRealResourcePath, isRealResourcePath, resolveResourcePath } from '../src/core/loader'
+import { normalizeRealResourcePath, isRealResourcePath, resolveResourcePath, isResourcePath } from '../src/core/loader'
 
 describe ('loader', () => {
   test('normalizeRealResourcePath', () => {
@@ -7,6 +7,11 @@ describe ('loader', () => {
     const result = normalizeRealResourcePath(str)
   
     expect(result).toMatchInlineSnapshot('"fffff/test.png"')
+  })
+
+
+  test('isResourcePath',()=>{
+    expect(isResourcePath('~resource/custom/vue')).toMatchInlineSnapshot('true')
   })
 
   test('isRealResourcePath', () => {
