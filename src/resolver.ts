@@ -1,18 +1,9 @@
+import { camelToKebab } from './core/utils'
+
 export interface ComponentsResolverOptions {
   customCollections?: string[]
   prefix?: string
 } 
-
-/**
- * Convert camelCase string to kebab-case
- */
-function camelToKebab(key: string): string {
-  const result = key
-    .replace(/:/g, '-')
-    .replace(/([A-Z])/g, ' $1')
-    .trim()
-  return result.split(/\s+/g).join('-').toLowerCase()
-}
 
 export default function ComponentsResolver(options: ComponentsResolverOptions = {}) {
   const { 

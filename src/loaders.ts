@@ -1,11 +1,15 @@
-import { join } from 'path'
+import { join, basename } from 'path'
+import createDebugger from 'debug'
 import { pathExists, unlink, readFile } from 'fs-extra'
 import fetch, { FormData, File } from 'node-fetch'
+import { createTryWrapper } from './core/utils'
 import type { FileSystemResourceSyncLoaderOptions, Loader } from './types'
+
+const debug = createDebugger('unplugin-resource')
 
 async function generateFileFromPath(path: string) {
   const buffer = await readFile(path)
-  const file = new File([buffer], path)
+  const file = new File([buffer], basename(path))
   return file
 }
 
@@ -20,7 +24,7 @@ async function generateFormData(path: string, options: FileSystemResourceSyncLoa
   const formData = new FormData()
   const file = await generateFileFromPath(path) 
   formData.append(name, file)
-  appendToFormData(formData, extra)
+  appendToFormData(formData, typeof extra === 'function' ? extra(file) : extra)
   return formData
 }
 
@@ -28,16 +32,26 @@ async function removeResourceFromPath(path: string) {
   await unlink(path)
 }
 
-async function uploadFile(formData: FormData, options: FileSystemResourceSyncLoaderOptions): Promise<boolean> {
+async function uploadFile(formData: FormData, options: FileSystemResourceSyncLoaderOptions): Promise<[boolean, string?]> {
   const { url, validate } = options
-  const result = await fetch(url, { method: 'POST', body: formData })
+  if (!url) {
+    return [false]
+  }
+  debug('uploading file')
+  const tryFetch = createTryWrapper(fetch)
+  const [isOk, result] = await tryFetch(url, { method: 'POST', body: formData })
+  if (!isOk) {
+    debug('upload file failed', result)
+    return [false]
+  }
   if (result.ok) {
     if (validate) {
-      return  validate(result.json())
+      const json = await result.json() 
+      return validate(json as Record<string, any>)
     }
-    return true
+    return [true]
   }
-  return false
+  return [false]
 }
 
 export function FileSystemResourceSyncLoader(options: FileSystemResourceSyncLoaderOptions): Loader {
@@ -46,16 +60,16 @@ export function FileSystemResourceSyncLoader(options: FileSystemResourceSyncLoad
 
   return async (path) => {
     const p = join(pwd, dir, path) 
-    console.log(
-      p, 'p---'
-    )
+    debug(`local path: ${p}`)
     const isExist = await pathExists(p)
     if (!isExist) {
       return 
     }
+    debug('generateFormData')
     const formData = await generateFormData(p, options)
-    const isOk = await uploadFile(formData, options)
+    const [isOk, url] = await uploadFile(formData, options)
     if (isOk) {
+      debug('upload file success: url:', url)
       removeResourceFromPath(p)
     }
   }

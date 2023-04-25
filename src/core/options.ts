@@ -4,7 +4,7 @@ export function resolveOptions(options: Options): ResolvedOptions  {
   const {
     compiler = 'vue3',
     customCollections = {},
-    prefix
+    prefix = ''
   } = options
 
   return {

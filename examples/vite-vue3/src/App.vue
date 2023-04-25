@@ -1,11 +1,12 @@
 <script setup lang="ts">
-// import ResourceTestImg from 'virtual:resource/custom/vue/png'
+import VueImg from 'virtual:resource/custom/vue'
 </script>
 
 <template>
   <div>
-    <!-- <ResourceTestImg class="h-200px w-200px" /> -->
-    <resource-custom-vue-png class="h-200px w-200px" />
+    fff
+    <VueImg class="h-20px"/>
+    <resource-custom-react class="w-200px" />
   </div>
 </template>
 

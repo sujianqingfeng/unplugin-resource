@@ -1,7 +1,7 @@
 import { test, expect, describe } from 'vitest'
 import { normalizeRealResourcePath, isRealResourcePath, resolveResourcePath } from '../src/core/loader'
 
-describe ('match-suffix', () => {
+describe ('loader', () => {
   test('normalizeRealResourcePath', () => {
     const str = 'fffff/test/png'
     const result = normalizeRealResourcePath(str)

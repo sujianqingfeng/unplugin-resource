@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { compilers } from './compilers'
 import { ResolvedOptions } from '../types'
 
@@ -41,12 +40,17 @@ export function resolveResourcePath(path: string) {
   }
 }
 
-function loadResourceTemplate(resource: string, prefix: string) {
+function generateSuffixPath(resource: string) {
   if (isRealResourcePath(resource)) {
     resource = normalizeRealResourcePath(resource)
   } else {
     resource += '.png'
   }
+  return resource
+}
+
+function loadResourceTemplate(resource: string, prefix: string) {
+  resource = generateSuffixPath(resource)
   return `<img src="${prefix}${resource}" />`
 }
 
@@ -72,7 +76,7 @@ export async function resourceSync(path: string, options: ResolvedOptions) {
   const { collection, resource } = resolved
   const loader = options.customCollections[collection]
   if (loader) {
-    const path = normalizeRealResourcePath(resource)
+    const path = generateSuffixPath(resource) 
     await loader(path)
   }
 }

@@ -9,6 +9,9 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ResourceCustomReact: typeof import('~resource/custom/react')['default']
+    ResourceCustomReactPng: typeof import('~resource/custom/react/png')['default']
+    ResourceCustomVue: typeof import('~resource/custom/vue')['default']
     ResourceCustomVuePng: typeof import('~resource/custom/vue/png')['default']
   }
 }

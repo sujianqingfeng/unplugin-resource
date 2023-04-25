@@ -13,6 +13,7 @@
   "devDependencies": {
     "@sujian/unplugin-resource": "workspace:^",
     "@vitejs/plugin-vue": "^4.1.0",
+    "dotenv": "^16.0.3",
     "typescript": "^5.0.2",
     "unocss": "^0.51.8",
     "unplugin-vue-components": "^0.24.1",

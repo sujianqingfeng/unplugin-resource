@@ -14,6 +14,6 @@ export type FileSystemResourceSyncLoaderOptions = {
   url: string
   dir: string
   name?: string
-  extra?: Record<string, any>
-  validate?: (res: Record<string, any>) => boolean
+  extra?: Record<string, any> | ((file: File) => Record<string, any>)
+  validate?: (res: Record<string, any>) => [boolean, string?]
 }

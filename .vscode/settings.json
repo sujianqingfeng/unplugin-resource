@@ -1,9 +1,11 @@
 {
   "cSpell.words": [
     "antfu",
+    "Attributify",
     "nvim",
     "sujian",
     "tsup",
+    "unocss",
     "Unplugin"
   ],
   "prettier.enable": false,

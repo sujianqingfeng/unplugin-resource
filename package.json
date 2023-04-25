@@ -65,10 +65,12 @@
   },
   "devDependencies": {
     "@sujian/eslint-config-typescript": "^0.0.25",
+    "@types/debug": "^4.1.7",
     "@types/fs-extra": "^11.0.1",
     "@types/node": "^18.16.0",
     "@vue/compiler-sfc": "^3.2.47",
     "cross-env": "^7.0.3",
+    "debug": "^4.3.4",
     "eslint": "^8.39.0",
     "fs-extra": "11.0.0",
     "local-pkg": "^0.4.3",

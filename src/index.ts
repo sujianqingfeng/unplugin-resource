@@ -1,7 +1,10 @@
+import createDebugger from 'debug'
 import { createUnplugin }  from 'unplugin'
-import { generateComponentFromPath, isResourcePath, normalizeResourcePath, resolveResourcePath, resourceSync } from './core/loader'
+import { generateComponentFromPath, isResourcePath, normalizeResourcePath, resourceSync } from './core/loader'
 import { resolveOptions } from './core/options'
 import type { Options } from './types'
+
+const debug = createDebugger('unplugin-resource')
 
 const unplugin = createUnplugin<Options | undefined>((options = {}) => {
 
@@ -10,15 +13,14 @@ const unplugin = createUnplugin<Options | undefined>((options = {}) => {
   return {
     name: 'unplugin-resource',
     enforce: 'pre',
-    resolveId(id) {
+    async resolveId(id) {
       if (isResourcePath(id)) {
         const res = normalizeResourcePath(id)
           .replace(/\.\w+$/i, '')
           .replace(/^\//, '')
-        console.log('resolveId', res)
 
-        resourceSync(id, resolved)
-
+        debug('resolveId', id)
+        await resourceSync(id, resolved)
         return res
       }
       return null
@@ -27,7 +29,6 @@ const unplugin = createUnplugin<Options | undefined>((options = {}) => {
       return isResourcePath(id)
     },
     async load(id) {
-      console.log('load', id)
       const code = await generateComponentFromPath(id, resolved)
       if (code) {
         return {
