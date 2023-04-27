@@ -6,5 +6,5 @@ export default defineConfig({
   dts: true,
   clean: true,
   splitting: true,
-  external: ['vue','@vue/compiler-sfc']
+  external: ['vue', '@vue/compiler-sfc', 'unplugin']
 })

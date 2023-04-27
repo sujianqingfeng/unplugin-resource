@@ -1,7 +1,6 @@
+import createDebugger from 'debug'
 import { compilers } from './compilers'
 import { ResolvedOptions } from '../types'
-import createDebugger from 'debug'
-
 
 const debug = createDebugger('unplugin-resource')
 

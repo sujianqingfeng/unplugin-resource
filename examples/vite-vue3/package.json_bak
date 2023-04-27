@@ -9,7 +9,7 @@
     "vue": "^3.2.47"
   },
   "devDependencies": {
-    "@sujian/unplugin-resource": "workspace:^",
+    "unplugin-resource": "workspace:^",
     "@vitejs/plugin-vue": "^4.1.0",
     "dotenv": "^16.0.3",
     "typescript": "^5.0.2",

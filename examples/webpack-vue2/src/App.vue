@@ -1,17 +1,13 @@
 <template>
   <div id="app">
-    ffff
+    <resource-custom-zzz />
   </div>
 </template>
 
 <script>
-import VueImg from '~resource/custom/vue'
 
 export default {
   name: 'App',
-  // components:{
-  //   ResourceVueImg
-  // }
 }
 </script>
 
